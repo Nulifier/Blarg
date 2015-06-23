@@ -1,0 +1,23 @@
+{
+  "name": "blarg",
+  "version": "0.0.1",
+  "description": "A bloging/CMS engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "cms"
+  ],
+  "author": "Nulifier",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.5.0",
+    "express": "^4.12.4"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-less": "^1.0.1"
+  }
+}
