@@ -1,11 +1,11 @@
+"use strict";
+
 module.exports = function(grunt) {
-	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json')
-		
-		less: {
+	// Time Grunt tasks
+	// require("time-grunt")(grunt);
 
-		}
+	// Load task configs
+	require("load-grunt-config")(grunt, {
+		jitGrunt: true
 	});
-
-	grunt.loadNpmTasks('grunt-contrib-less');
-}
+};

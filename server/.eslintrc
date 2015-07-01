@@ -1,0 +1,17 @@
+{
+	"env": {
+		"node": true
+	},
+	"globals": {
+		"__base": false
+	},
+	"rules": {
+		"new-cap": [2, {
+			// Used for express.Router calls
+			"capIsNewExceptions": [
+				"Router",
+				"ENUM"
+			]
+		}]
+	}
+}
