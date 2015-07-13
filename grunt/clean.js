@@ -1,6 +1,8 @@
 "use strict";
 
+var config		= require("./config");
+
 module.exports = [
-	"server/public-build",
-	"server/logs/*"
+	config.clientBuildDir,
+	config.logsDir
 ];

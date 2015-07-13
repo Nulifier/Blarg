@@ -1,17 +1,21 @@
 "use strict";
 
+var path		= require("path");
+var config		= require("./config");
+
 module.exports = {
 	options: {
 		paths: [
-			"server/public/styles/inc"
+			path.join(config.clientStylesDir, "inc"),
+			path.join(__dirname, "../node_modules")
 		]
 	},
 	dev: {
 		files: [
 			{
 				expand: true,
-				src: ["server/public/styles/*.less"],
-				dest: "server/public-build/styles",
+				src: [config.clientStylesDir + "/*.less"],
+				dest: config.clientBuildStyles,
 				ext: ".css",
 				flatten: true
 			}
@@ -26,8 +30,8 @@ module.exports = {
 		files: [
 			{
 				expand: true,
-				src: ["server/public/styles/*.less"],
-				dest: "server/public-build/styles",
+				src: [config.clientStylesDir + "/*.less"],
+				dest: config.clientBuildStyles,
 				ext: ".min.css",
 				flatten: true
 			}

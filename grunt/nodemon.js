@@ -1,21 +1,22 @@
 "use strict";
 
+var config		= require("./config");
+
 module.exports = {
 	dev: {
-		script: "server/main.js",
+		script: config.serverMain,
 		options: {
 			env: {
-				PORT: 3000,
-				NODE_ENV: "development"
+				PORT: config.serverPort,
+				NODE_ENV: config.serverEnv,
 			},
 			watch: [
-				"server/",
-				"Gruntfile.js",
-				"grunt/nodemon.js"
+				__filename,
+				config.serverDir,
+				"!" + config.serverDir + "/tests"
 			],
 			ignore: [
-				"server/public/",
-				"server/public-build/"
+				config.clientBuildDir
 			]
 		}
 	}

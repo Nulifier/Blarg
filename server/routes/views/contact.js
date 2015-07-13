@@ -1,7 +1,7 @@
 "use strict";
 
-module.exports = function(route) {
-	route.get(function(req, res) {
+module.exports = function(router) {
+	router.get("/contact", function(req, res) {
 		res.render("contact");
 	});
 };

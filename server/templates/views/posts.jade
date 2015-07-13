@@ -1,0 +1,9 @@
+extends ../layouts/main-sidebar
+
+include ../mixins/posts
+
+block content
+	+postList(posts)
+
+block sidebar
+	p This is a summary by date or something

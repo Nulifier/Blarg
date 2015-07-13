@@ -13,20 +13,26 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
 var db = {};
 
 // Include all models in this folder
-glob("*.js", {
-	cwd: __dirname,
-	ignore: "index.js"
-}, function(err, files) {
-	if (err) {
-		logger.error("Error loading models: " + err.message);
-	}
+try {
+	var files = glob.sync("*.js", {
+		cwd: __dirname,
+		ignore: "index.js"
+	});
 
 	files.forEach(function(file) {
 		var model = sequelize.import(path.join(__dirname, file));
+
+		if (!model) {
+			throw new Error("Model definition file \"" + file + "\" failed to export anything");
+		}
+
 		logger.trace("Adding model: " + model.name);
 		db[model.name] = model;
 	});
-});
+}
+catch (err) {
+	logger.error("Error loading models: " + err.message);
+}
 
 // Run the associate callbacks for each model to build associations after the models are created
 Object.keys(db).forEach(function(modelName) {

@@ -1,14 +1,13 @@
 "use strict";
 
-module.exports = {
-	options: {
+var config		= require("./config");
 
-	},
+module.exports = {
 	dev: {
 		src: [
-			"server/**/*.js",
-			"*.js",
-			"grunt/*.js"
+			config.clientScriptsDir + "/**/*.js",
+			config.serverDir + "/**/*.js",
+			"!" + config.clientBuildDir + "/**"
 		]
 	}
 };

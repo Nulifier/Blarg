@@ -1,3 +1,5 @@
 /node_modules
 /logs
-/server/public-build
+/temp
+/server/public
+/server/db.devel.sqlite

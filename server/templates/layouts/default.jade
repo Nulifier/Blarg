@@ -1,3 +1,5 @@
+include ../mixins/util
+
 doctype html
 html(lang='en')
 	head
@@ -8,21 +10,32 @@ html(lang='en')
 		meta(name='description', content='')
 		meta(name='viewport', content='width=device-width, initial-scale=1')
 
-		link(rel='stylesheet', type='text/css', href='styles/common.css')
+		+style("/styles/common.css")
+
+		block styles
+
+		+script("/scripts/commons.js")
+
+		block scripts
+			
 	body
 		nav
 			.container
 				.navbar
-					a.navbar-heading sunk.io
+					a.navbar-heading(href="/") sunk.io
 					ul
-						li: a(href='posts') Posts
-						li: a(href='contact') Contact
+						li: a(href="/posts") Posts
+						li: a(href="/contact") Contact
+						li: a(href="/admin") Admin
 
 		.container
-			.col.span_2_of_3
-				block content
-			.col.span_1_of_3
-				block sidebar
+			block container
+
+		.container
+			if user
+				p Logged in as: #{user.username}
+
+	block delayedScripts
 
 	//
 		script.

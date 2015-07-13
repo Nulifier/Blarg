@@ -9,6 +9,4 @@ log4js.configure({
 	]
 });
 
-log4js.setGlobalLogLevel("ALL");
-
 module.exports = log4js.getLogger;
