@@ -1,0 +1,15 @@
+extends default
+
+block append styles
+	+style("/styles/admin.css")
+
+block container
+	.col.span_2_of_3
+		block content
+	.col.span_1_of_3
+		ul.sidebar-nav
+			li.nav-label Content
+			li: a(href="/admin/posts") Posts
+
+			li.nav-label Administration
+			li: a(href="/admin/users") Users

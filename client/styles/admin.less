@@ -1,15 +1,23 @@
+@import (inline) "medium-editor/dist/css/medium-editor.css";
+@import (inline) "medium-editor/dist/css/themes/bootstrap.css";
+
 .sidebar-nav {
 	list-style: none;
 	padding: 0;
+	margin: 0;
 
 	li {
 		padding-left: 1em;
 	}
 
 	.nav-label {
-		margin: 0;
+		margin: 1em 0 0 0;
 		padding: 0;
 		font-weight: bold;
+
+		&:first-child {
+			margin: 0;
+		}
 
 		&:after {
 			content: "";
@@ -22,4 +30,73 @@
 	}
 }
 
+.right {
+	float: right;
+}
 
+.tab-container {
+	position: relative;
+
+	ul {
+		margin: 0;
+		padding-left: 0.5em;
+	}
+
+	li, .tab {
+		background-color: #ddd;
+	}
+
+	.active {
+		background-color: #eee;
+	}
+
+	li {
+		display: inline-block;
+		padding: 0.2em 1em 0.2em 1em;
+		color: #999;
+		
+		border-radius: 5px 5px 0 0;
+		margin: 0 0.2em 0 0;
+
+		&.active {
+			color: #333;
+		}
+	}
+
+	.tab {
+		border-radius: 5px;
+		margin: 0;
+		padding: 0.5em;
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+}
+
+.toolbar {
+	cursor: pointer;
+	border-radius: 5px;
+	background-color: #333;
+	color: white;
+
+	span {
+		@pad: 0.3em;
+		@size: @pad+1em;
+
+		border-radius: 0.2em;
+		background-color: #555;
+		display: inline-block;
+		padding: @pad;
+		margin: 0.3em 0 0.3em 0.3em;
+		width: @size;
+		height: @size;
+		text-align: center;
+	}
+
+	.space {
+		display: inline-block;
+		margin-left: 0.6em;
+	}
+}

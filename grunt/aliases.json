@@ -1,12 +1,19 @@
 {
 	"default": [
-		"clean",
-		"less"
+		"dev"
 	],
 	"dev": [
-
+		"clean",
+		"eslint",
+		"fontello:dist",
+		"less:dev",
+		"webpack:dev"
 	],
 	"prod": [
-		
+		"clean",
+		"eslint",
+		"fontello:dist",
+		"less:prod",
+		"webpack:prod"	
 	]
 }

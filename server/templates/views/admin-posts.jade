@@ -1,0 +1,42 @@
+extends ../layouts/admin-panel.jade
+
+mixin sortLink(title, property)
+	-
+		var link = "posts?sort=" + property + "&dir=";
+		var direction
+		if (sortField === property) {
+			direction = sortDirection === "DESC" ? "ASC" : "DESC";
+		}
+		else {
+			// The default is to sort this column ascending
+			direction = "ASC";
+		}
+		link += direction;
+	th: a(href=link) #{title}
+		if sortField === property
+			case direction
+				when "ASC"
+					span.icon-down-big.right
+				when "DESC"
+					span.icon-up-big.right
+
+mixin authorName(post)
+	if post.author
+		td: a(href="/admin/users/"+post.authorId) #{post.author.firstName} #{post.author.lastName}
+	else
+		td Anonymous
+
+block content
+	table
+		thead: tr
+			+sortLink("Title", "title")
+			td Author
+			+sortLink("Published", "publishedDate")
+			td Edit
+		tbody
+			each post in posts
+				tr
+					td: a(href="/admin/posts/" + post.id) #{post.title}
+					+authorName(post)
+					td #{moment(post.publishedDate).calendar()}
+					td: a(href="/admin/posts/"+post.id, title="Edit").icon-edit

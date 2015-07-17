@@ -1,0 +1,47 @@
+extends ../layouts/admin-panel.jade
+
+block append delayedScripts
+	+script("/scripts/admin-post.js")
+
+block content
+	form(method="post")
+		button(type="submit").primary Save
+		fieldset
+			label Title
+			input(
+				name="title"
+				type="text"
+				placeholder="Enter a title"
+				value=post.title)
+		fieldset
+			label State
+			select(name="state")
+				option(value="draft" selected=(post.state==="draft")) Draft
+				option(value="published" selected=(post.state==="published")) Published
+				option(value="archived" selected=(post.state==="archived")) Archived
+		.tab-container
+			ul.tab-labels
+				li Code
+				li.active Design
+			.tab
+				textarea(
+					name="content"
+					placeholder="Enter post content"
+					required)#code-editor #{post.content}
+			.tab.active
+				//
+					.toolbar
+					span#bold(title="Bold"): b B
+					span#italic(title="Italics"): i I
+					span#underline(title="Underline"): u U
+					span#strike(title="Strikethrough"): s S
+					.space
+					span#sub(title="Subscript"): small x#[sub 2]
+					span#super(title="Superscript"): small x#[sup 2]
+					.space
+					span#h1(title="Header 1") H1
+					span#h2(title="Header 2") H2
+
+				#design-editor: !{post.content}
+
+		

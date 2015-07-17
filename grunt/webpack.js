@@ -39,7 +39,7 @@ module.exports = {
 				this.plugin("done", function(stats) {
 					console.log(stats.toJson);
 					require("fs").writeFileSync(	// eslint-disable-line no-sync
-						path.join(__dirname, "../logs/", "webpack-stats.json"),
+						path.join(__dirname, "../", "webpack-stats-dev.json"),
 						JSON.stringify(stats.toJson()));
 				});
 			}
@@ -50,6 +50,10 @@ module.exports = {
 					test: /\.js$/,
 					exclude: /(node_modules)/,
 					loader: "babel?cacheDirectory"
+				},
+				{
+					test: /medium\.js/,
+					loader: "imports?mediumShim=>require('../../scripts/medium-shim')"
 				}
 			]
 		},
@@ -77,13 +81,25 @@ module.exports = {
 			new webpack.ProvidePlugin({
 				fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
 			}),
-			new webpack.optimize.UglifyJsPlugin()
+			new webpack.optimize.UglifyJsPlugin(),
+			function() {
+				this.plugin("done", function(stats) {
+					console.log(stats.toJson);
+					require("fs").writeFileSync(	// eslint-disable-line no-sync
+						path.join(__dirname, "../", "webpack-stats-prod.json"),
+						JSON.stringify(stats.toJson()));
+				});
+			}
 		],
 		module: {
 			loaders: [
 				{
 					test: /\.js$/,
 					loader: "babel"
+				},
+				{
+					test: /medium\.js/,
+					loader: "imports?mediumShim=>require('../../scripts/medium-shim')"
 				}
 			]
 		},

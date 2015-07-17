@@ -1,8 +1,20 @@
 extends ../layouts/main-sidebar
 
 block content
-	h1= post.title
-	div= post.content
+	header
+		h1= post.title
+		if author
+			p #{author.firstName} #{author.lastName} - #[time #{moment(post.publishedDate).calendar()}]
+		else
+			p Anonymous - #[time #{moment(post.publishedDate).calendar()}]
+	div !{renderedPost}
 
 block sidebar
-	p This is a sidebar
+	h3 Categories
+	ul
+		li First Category
+		li Second Category
+	h3 Popular Posts
+	ul
+		li Good Post
+		li Almost as good the other post

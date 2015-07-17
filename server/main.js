@@ -14,6 +14,8 @@ var logger		= require("./log")("application");
 var config		= require("./config");
 var models		= require("./models");
 var path		= require("path");
+var querystring	= require("querystring");
+var moment		= require("moment");
 var _			= require("lodash");
 
 var app = express();
@@ -34,6 +36,7 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Body parser
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
@@ -51,7 +54,8 @@ app.use(session({
 require("./authentication")(app);
 
 // Add some values for the templates to use
-app.locals.moment = require("moment");
+app.locals.moment = moment;
+app.locals.querystring = querystring;
 app.use(function(req, res, next) {
 	res.locals.user = req.user;
 	next();
@@ -59,13 +63,6 @@ app.use(function(req, res, next) {
 
 // Setup routes
 require("./routes")(app);
-
-// Handle 404 not found
-app.use(function(req, res, next) {
-	var err = new Error("Not Found");
-	err.status = 404;
-	next(err);
-});
 
 // Setup error handlers
 app.use(function(err, req, res, next) {	// eslint-disable-line no-unused-vars
@@ -75,6 +72,13 @@ app.use(function(err, req, res, next) {	// eslint-disable-line no-unused-vars
 		message: err.message,
 		error: app.get("env") === "development" ? err : {}
 	});
+});
+
+// Handle 404 not found
+app.use(function(req, res, next) {
+	var err = new Error("Not Found");
+	err.status = 404;
+	next(err);
 });
 
 // Sync the database models

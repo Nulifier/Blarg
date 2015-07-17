@@ -3,3 +3,5 @@
 /temp
 /server/public
 /server/db.devel.sqlite
+/webpack-stats-*.json
+/client/styles/fontello

@@ -1,0 +1,52 @@
+// To change the icons available edit the /Blarg/grunt/fontello.json file
+// 		using http://www.fontello.com/
+@import (inline) "../fontello/blarg.css";
+
+// Import fonts from google fonts
+// This was moved into the default template to avoid having a delayed request.
+//@import url(http://fonts.googleapis.com/css?family=Montserrat|Roboto:300,300italic,700);
+
+.font-body() {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
+
+.font-body-bold() {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+}
+
+.font-body-italic() {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-style: italic;
+}
+
+.font-heading() {
+	font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+	.font-heading;
+	font-size: 64px;
+	margin: 0 0 25px 0;
+	line-height: 73px;
+}
+
+header {
+	p {
+		.font-body-italic;
+		color: #aaa;
+	}
+}
+
+p {
+	.font-body;
+	font-size: 17px;
+	line-height: 26px;
+	margin: 0 0 35px 0;
+}
+
+body {
+	.font-body;
+}

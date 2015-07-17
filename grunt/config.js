@@ -16,7 +16,7 @@ c.serverEnv				= "development";
 
 c.scriptDirPostfix		= "scripts";
 c.cssDirPostfix			= "styles";
-c.fontsDirPostfix		= "fonts";
+c.fontsDirPostfix		= "font";
 
 c.clientDir				= join(c.rootDir, "client");
 c.clientScriptsDir		= join(c.clientDir, c.scriptDirPostfix);

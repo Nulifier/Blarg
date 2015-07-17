@@ -1,0 +1,44 @@
+fieldset {
+	border: 0;
+}
+
+label {
+	width: 8em;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 1em 0 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="datetime"],
+select, textarea {
+	padding: 0.5em 0.6em;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-shadow: inset 0 1px 3px #ddd;
+	border-radius: 4px;
+	vertical-align: middle;
+	box-sizing: border-box;
+	
+	&:focus {
+		outline: 0;
+		border-color: #129fea;
+	}
+	
+	&[disabled] {
+		cursor: not-allowed;
+		background-color: #eaeded;
+		color: #cad2d3;
+	}
+}
+
+textarea {
+	width: 100%;
+	height: 40em;
+}
