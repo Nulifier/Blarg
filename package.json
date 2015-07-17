@@ -3,15 +3,20 @@
   "version": "0.0.1",
   "description": "A bloging/CMS engine",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "blog",
     "cms"
   ],
+  "bugs": "https://github.com/Nulifier/Blarg/issues",
   "author": "Nulifier",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nulifier/Blarg.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
   "dependencies": {
     "bcryptjs": "^2.1.0",
     "bluebird": "^2.9.30",
@@ -29,15 +34,14 @@
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "sequelize": "^3.3.2",
-    "sqlite3": "^3.0.8"
+    "sqlite3": "^3.0.9"
   },
   "devDependencies": {
     "babel-core": "^5.6.15",
     "babel-loader": "^5.3.1",
     "chai": "^3.0.0",
     "es6-promise": "^2.3.0",
-    "eslint": "^0.24.0",
-    "eslint-plugin-react": "^2.6.4",
+    "eslint": "^0.24.1",
     "exports-loader": "^0.6.2",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
@@ -56,7 +60,6 @@
     "load-grunt-config": "^0.17.1",
     "lodash.throttle": "^3.0.4",
     "medium-editor": "^5.4.0",
-    "minifyify": "^7.0.2",
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
     "sinon": "^1.15.4",

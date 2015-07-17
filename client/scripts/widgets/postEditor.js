@@ -2,16 +2,13 @@ let util			= require("../util/util.js");
 let beautifyHTML	= require("js-beautify").html;
 let MediumEditor	= require("medium-editor");
 
-module.exports = function(codeEditorEl, designEditorEl) {
-	let editor = new MediumEditor("#design-editor", {});
+module.exports = function(codeEditorSel, designEditorSel) {
+	let codeEditorEl = document.querySelector(codeEditorSel);
+	let editor = new MediumEditor(designEditorSel, {});
 
-	let designChangeHandler = util.throttle(function handleDesignChange() {
-		codeEditorEl.value = beautifyHTML(editor.value(), {
-			wrap_line_length: 0
+	editor.subscribe("editableInput", util.throttle(function(event, editable) {
+		codeEditorEl.value = beautifyHTML(editable.innerHTML, {
+			wrap_line_length: 0		// eslint-disable-line camelcase
 		});
-	}, 1000);
-
-	editor.subscribe("editableInput", function(event, editable) {
-		codeEditorEl.value = editable.innerHTML;
-	});
+	}, 1000));
 };

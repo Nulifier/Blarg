@@ -1,4 +1,11 @@
 {
+	"prepublish": [
+		"fontello:dist",
+		"less:dev",
+		"less:prod",
+		"webpack:dev",
+		"webpack:prod"
+	],
 	"default": [
 		"dev"
 	],
@@ -15,5 +22,8 @@
 		"fontello:dist",
 		"less:prod",
 		"webpack:prod"	
+	],
+	"test": [
+		"mochaTest"
 	]
 }

@@ -7,7 +7,5 @@ util.ready(function() {
 	tabWidget(document.querySelector(".tab-container"));
 
 	// Setup the editor
-	let codeEditorEl = document.getElementById("code-editor");
-	let designEditorEl = document.getElementById("design-editor");
-	postEditor(codeEditorEl, designEditorEl);
+	postEditor("#code-editor", "#design-editor");
 });

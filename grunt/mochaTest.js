@@ -7,6 +7,9 @@ module.exports = {
 		options: {
 			reporter: "spec",
 			require: [
+				function() {
+					process.env.NODE_ENV = "test";
+				},
 				function() {sinon = require("sinon");},
 				function() {__base = config.serverDir},
 				function() {

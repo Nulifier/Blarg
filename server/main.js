@@ -66,7 +66,7 @@ require("./routes")(app);
 
 // Setup error handlers
 app.use(function(err, req, res, next) {	// eslint-disable-line no-unused-vars
-	logger.error("Error: " + err.message);
+	logger.error("Error: " + err.stack);
 	res.status(err.status || 501);
 	res.render("error", {
 		message: err.message,
