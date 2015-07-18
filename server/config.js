@@ -2,14 +2,24 @@
 
 /* eslint no-process-env:0 */
 
-var devEnv = process.env.NODE_ENV === "development";
+var dbConfig = {
+	development: {
+		dialect: "sqlite",
+		storage: __base + "/db.dev.sqlite"
+	},
+	test: {
+		dialect: "sqlite",
+		logging: false
+	},
+	production: {
+		dialect: "sqlite",
+		storage: __base + "/db.prod.sqlite",
+		logging: false
+	}
+};
 
 module.exports = {
 	port: process.env.PORT || 3000,
 	cookieSecret: "GpARVxCNzce5Qd9GNSCO",
-	database: {
-		dialect: "sqlite",
-		storage: __base + "/db.devel.sqlite",
-		logging: devEnv ? null : false
-	}
+	database: dbConfig[process.env.NODE_ENV]
 };

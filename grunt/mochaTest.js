@@ -3,7 +3,7 @@ var config	= require("./config");
 
 module.exports = {
 	test: {
-		src: [config.serverDir + "/tests/**/*.js"],
+		src: [config.serverDir + "/tests/index.js"],
 		options: {
 			reporter: "spec",
 			require: [

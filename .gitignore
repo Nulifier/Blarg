@@ -2,6 +2,6 @@
 /logs
 /temp
 /server/public
-/server/db.devel.sqlite
+/server/db.*.sqlite
 /webpack-stats-*.json
 /client/styles/fontello

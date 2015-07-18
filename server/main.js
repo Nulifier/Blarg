@@ -16,7 +16,6 @@ var models		= require("./models");
 var path		= require("path");
 var querystring	= require("querystring");
 var moment		= require("moment");
-var _			= require("lodash");
 
 var app = express();
 
@@ -86,16 +85,7 @@ logger.info("Syncing database");
 models.sequelize.sync({force: true}).then(function() {
 	// Load test data if this is a development system
 	if (app.get("env") === "development") {
-		var testData = require("./testData");
-		_.forOwn(testData, function(modelData, modelName) {
-			var model = models[modelName];
-			if (model) {
-				model.bulkCreate(modelData);
-			}
-			else {
-				logger.error("Invalid model name in test data: " + modelName);
-			}
-		});
+		require("./testData")();
 	}
 
 	// Start the server

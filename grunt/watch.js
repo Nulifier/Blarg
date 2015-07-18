@@ -28,6 +28,6 @@ module.exports = {
 			config.serverDir + "/**/*.js",
 			"!" + config.clientBuildDir + "/**"
 		],
-		tasks: ["newer:eslint"]
+		tasks: ["newer:eslint:dev"]
 	}
 };

@@ -1,6 +1,11 @@
 "use strict";
 
-module.exports = {
+var _		= require("lodash");
+var logger	= require("./log")("models");
+var models	= require("./models");
+var Promise	= require("bluebird");
+
+var testData = {
 	User: [
 		{
 			id: 1,
@@ -64,4 +69,18 @@ module.exports = {
 			postId: 2
 		}
 	]
+};
+
+module.exports = function insertTestData() {
+	var promises = [];
+	_.forOwn(testData, function(modelData, modelName) {
+		var model = models[modelName];
+		if (model) {
+			promises.push(model.bulkCreate(modelData));
+		}
+		else {
+			logger.error("Invalid model name in test data: " + modelName);
+		}
+	});
+	return Promise.all(promises);
 };
