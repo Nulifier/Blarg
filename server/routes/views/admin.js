@@ -2,6 +2,7 @@
 
 var models		= require(__base + "/models");
 var _			= require("lodash");
+var logger		= require(__base + "/log")("routes");
 
 module.exports = function(router) {
 	router.get("/admin", function(req, res) {
@@ -47,13 +48,27 @@ module.exports = function(router) {
 		});
 	});
 
-	router.post("/admin/posts/:id", function(req, res) {
-		var user = {
-			id: parseInt(req.params.id),
-			title: req.body.title,
-			state: req.body.state
-		};
-		console.log(user);
-		res.redirect(303, "/admin/posts/" + user.id);
+	router.post("/admin/posts/:id", function(req, res, next) {
+		var id = parseInt(req.params.id);
+		var validProperties = [
+			"title",
+			"state",
+			"content"
+		];
+
+		var user = _.pick(req.body, validProperties);
+
+		models.Post.update(user, {
+			where: {id: id},
+			fields: validProperties,
+			limit: 1
+		})
+		.then(function(result) {
+			logger.info("Number of updated posts: " + result[0]);
+			res.redirect(303, "/admin/posts/" + id);
+		})
+		.catch(function(err) {
+			return next(err);
+		});
 	});
 };
