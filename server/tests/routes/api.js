@@ -23,15 +23,6 @@ function router(routes) {
 	};
 }
 
-/* function test(expectation, done) {
-	try {
-		expectation();
-	}
-	catch(err) {
-		done(err);
-	}
-} */
-
 module.exports = function() {
 	describe("comments", function() {
 		var routes;

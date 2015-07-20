@@ -22,6 +22,8 @@ describe("Server", function() {
 	});
 
 	describe("Routes", function() {
-		require("./routes/api")();
+		describe("APIs", require("./routes/api"));
 	});
+
+	describe("Models", require("./models"));
 });
