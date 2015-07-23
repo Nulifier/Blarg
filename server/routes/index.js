@@ -1,8 +1,8 @@
 "use strict";
 
-var glob	= require("glob");
-var logger	= require(__base + "/log")("routes");
-var express	= require("express");
+var glob		= require("glob");
+var logger		= require(__base + "/log")("routes");
+var obsidian	= require("obsidian");
 
 module.exports = function(app) {
 	logger.trace("Looking for routes");
@@ -14,7 +14,7 @@ module.exports = function(app) {
 		});
 
 		// Create the router
-		var router = express.Router();
+		var router = obsidian.express.Router();
 
 		files.forEach(function(file) {
 			// Get the name excluding the extension

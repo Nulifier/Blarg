@@ -1,6 +1,6 @@
 "use strict";
 
-var models		= require(__base + "/models");
+var models		= require("obsidian").models;
 
 var safeUserAttributes = [
 	"id",

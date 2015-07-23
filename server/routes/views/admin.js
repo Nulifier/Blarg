@@ -1,6 +1,6 @@
 "use strict";
 
-var models		= require(__base + "/models");
+var models		= require("obsidian").models;
 var _			= require("lodash");
 var logger		= require(__base + "/log")("routes");
 

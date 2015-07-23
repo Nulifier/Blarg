@@ -2,7 +2,7 @@
 
 var _		= require("lodash");
 var logger	= require("./log")("models");
-var models	= require("./models");
+var models	= require("obsidian").models;
 var Promise	= require("bluebird");
 
 var testData = {

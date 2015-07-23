@@ -1,6 +1,6 @@
 "use strict";
 
-var models		= require(__base + "/models");
+var models		= require("obsidian").models;
 
 module.exports = function(router) {
 	router.get("/api/comments", function(req, res, next) {

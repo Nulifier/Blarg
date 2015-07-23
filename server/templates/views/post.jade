@@ -7,7 +7,7 @@ block content
 			p #{author.firstName} #{author.lastName} - #[time #{moment(post.publishedDate).calendar()}]
 		else
 			p Anonymous - #[time #{moment(post.publishedDate).calendar()}]
-	div !{renderedPost}
+	div !{post.content}
 
 block sidebar
 	h3 Categories

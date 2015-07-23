@@ -1,8 +1,6 @@
 "use strict";
 
-var models		= require(__base + "/models");
-var MarkdownIt	= require("markdown-it");
-var md			= new MarkdownIt();
+var models		= require("obsidian").models;
 
 module.exports = function(router) {
 	router.get("/posts", function(req, res, next) {
@@ -23,7 +21,6 @@ module.exports = function(router) {
 		models.Post.findById(req.params.id)
 		.then(function(post) {
 			res.locals.post = post;
-			res.locals.renderedPost = md.render(post.content);
 			return post.getAuthor();
 		})
 		.then(function(author) {
