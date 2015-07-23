@@ -25,7 +25,7 @@ obsidian.init({
 	models: require("./models")
 });
 
-var app = obsidian.get["app"];
+var app = obsidian.get("app");
 
 // Middleware
 app.use(log4js.connectLogger(require("./log")("requests"), {level: "auto"}));

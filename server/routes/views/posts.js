@@ -1,10 +1,10 @@
 "use strict";
 
-var models		= require("obsidian").models;
+var obsidian	= require("obsidian");
 
 module.exports = function(router) {
 	router.get("/posts", function(req, res, next) {
-		models.Post.findAll({
+		obsidian.model("Post").findAll({
 			where: {
 				state: "published"
 			}
@@ -18,7 +18,7 @@ module.exports = function(router) {
 	});
 
 	router.get("/posts/:id", function(req, res, next) {
-		models.Post.findById(req.params.id)
+		obsidian.model("Post").findById(req.params.id)
 		.then(function(post) {
 			res.locals.post = post;
 			return post.getAuthor();
