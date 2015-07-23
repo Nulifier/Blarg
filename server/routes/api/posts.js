@@ -1,13 +1,13 @@
 "use strict";
 
-var models		= require("obsidian").models;
+var obsidian		= require("obsidian");
 
 module.exports = function(router) {
 	router.get("/api/posts", function(req, res, next) {
 		var limit = parseInt(req.query.limit);
 		var offset = parseInt(req.query.offset);
 
-		models.Post.findAll({
+		obsidian.model("Post").findAll({
 			limit: limit,
 			offset: offset
 		})
@@ -26,7 +26,7 @@ module.exports = function(router) {
 			throw new Error("Id must be a number");
 		}
 
-		models.Post.findById(id)
+		obsidian.model("Post").findById(id)
 		.then(function(post) {
 			if (post) {
 				res.json(post);

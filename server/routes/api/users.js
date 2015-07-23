@@ -1,6 +1,6 @@
 "use strict";
 
-var models		= require("obsidian").models;
+var obsidian		= require("obsidian");
 
 var safeUserAttributes = [
 	"id",
@@ -14,7 +14,7 @@ module.exports = function(router) {
 		var limit = parseInt(req.query.limit);
 		var offset = parseInt(req.query.offset);
 
-		models.User.findAll({
+		obsidian.model("User").findAll({
 			limit: limit,
 			offset: offset,
 			attributes: safeUserAttributes
@@ -34,7 +34,7 @@ module.exports = function(router) {
 			throw new Error("Id must be a number");
 		}
 
-		models.User.findById(id, {attributes: safeUserAttributes})
+		obsidian.model("User").findById(id, {attributes: safeUserAttributes})
 		.then(function(user) {
 			if (user) {
 				res.json(user);

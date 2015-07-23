@@ -1,9 +1,9 @@
 "use strict";
 
-var _		= require("lodash");
-var logger	= require("./log")("models");
-var models	= require("obsidian").models;
-var Promise	= require("bluebird");
+var _			= require("lodash");
+var logger		= require("./log")("models");
+var Promise		= require("bluebird");
+var obsidian	= require("obsidian");
 
 var testData = {
 	User: [
@@ -74,13 +74,8 @@ var testData = {
 module.exports = function insertTestData() {
 	var promises = [];
 	_.forOwn(testData, function(modelData, modelName) {
-		var model = models[modelName];
-		if (model) {
-			promises.push(model.bulkCreate(modelData));
-		}
-		else {
-			logger.error("Invalid model name in test data: " + modelName);
-		}
+		var model = obsidian.model(modelName);
+		promises.push(model.bulkCreate(modelData));
 	});
 	return Promise.all(promises);
 };

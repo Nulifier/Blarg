@@ -20,17 +20,19 @@ obsidian.init({
 	"view engine": "jade",
 	views: path.join(__dirname, "/templates/views"),
 	routes: require("./routes"),
-	models: require("./models"),
 	database: config.database,
-	static: path.join(__dirname, "public")
+	static: path.join(__dirname, "public"),
+	models: require("./models")
 });
 
+var app = obsidian.get["app"];
+
 // Middleware
-obsidian.app.use(log4js.connectLogger(require("./log")("requests"), {level: "auto"}));
+app.use(log4js.connectLogger(require("./log")("requests"), {level: "auto"}));
 
 // Setup sessions
 // TODO: Switch to a better session store
-obsidian.app.use(session({
+app.use(session({
 	cookie: {secure: false},
 	secret: config.cookieSecret,
 	resave: false,				// TODO: Actually check if the store we use implements the touch method
@@ -38,12 +40,12 @@ obsidian.app.use(session({
 }));
 
 // Setup authentication
-require("./authentication")(obsidian.app);
+require("./authentication")(app);
 
 // Add some values for the templates to use
-obsidian.app.locals.moment = moment;
-obsidian.app.locals.querystring = querystring;
-obsidian.app.use(function(req, res, next) {
+app.locals.moment = moment;
+app.locals.querystring = querystring;
+app.use(function(req, res, next) {
 	res.locals.user = req.user;
 	next();
 });

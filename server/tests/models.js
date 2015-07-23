@@ -1,6 +1,6 @@
 "use strict";
 
-var models		= require(__base + "/models");
+var obsidian	= require("obsidian");
 
 module.exports = function() {
 	before(function() {
@@ -9,14 +9,14 @@ module.exports = function() {
 
 	describe("User", function() {
 		it("should get some users", function() {
-			return models.User.findAll()
+			return obsidian.model("User").findAll()
 			.then(function(users) {
 				users.should.not.be.empty;
 			});
 		});
 
 		it("should have certain fields", function() {
-			return models.User.findAll()
+			return obsidian.model("User").findAll()
 			.then(function(users) {
 				users.should.not.be.empty;
 				var user = users[0];
@@ -36,7 +36,7 @@ module.exports = function() {
 
 		describe("storePassword", function() {
 			it("should return a hash", function() {
-				return models.User.findAll()
+				return obsidian.model("User").findAll()
 				.then(function(users) {
 					users.should.not.be.empty;
 					var user = users[0];

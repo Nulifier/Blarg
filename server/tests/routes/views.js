@@ -1,6 +1,6 @@
 "use strict";
 
-var models		= require(__base + "/models");
+var obsidian	= require("obsidian");
 var adminView	= require(__base + "/routes/views/admin");
 var fakeRouter	= require("./fakeRouter");
 
@@ -31,7 +31,7 @@ module.exports = function() {
 
 			before("Get user before modification", function() {
 
-				return models.Post.findById(postId)
+				return obsidian.model("Post").findById(postId)
 				.then(function(post) {
 					oldPost = post;
 				});
@@ -56,7 +56,7 @@ module.exports = function() {
 
 			it("should update the post", function() {
 				// Get the new post
-				return models.Post.findById(postId)
+				return obsidian.model("Post").findById(postId)
 				.then(function(newPost) {
 					newPost.title.should.equal(req.body.title);
 					newPost.state.should.equal(req.body.state);

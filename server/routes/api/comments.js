@@ -1,13 +1,13 @@
 "use strict";
 
-var models		= require("obsidian").models;
+var obsidian	= require("obsidian");
 
 module.exports = function(router) {
 	router.get("/api/comments", function(req, res, next) {
 		var limit = parseInt(req.query.limit);
 		var offset = parseInt(req.query.offset);
 
-		models.Comment.findAll({
+		obsidian.model("Comment").findAll({
 			limit: limit,
 			offset: offset
 		})

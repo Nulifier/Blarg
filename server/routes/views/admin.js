@@ -1,6 +1,6 @@
 "use strict";
 
-var models		= require("obsidian").models;
+var obsidian	= require("obsidian");
 var _			= require("lodash");
 var logger		= require(__base + "/log")("routes");
 
@@ -22,8 +22,8 @@ module.exports = function(router) {
 		res.locals.sortField = sortField;
 		res.locals.sortDirection = sortDirection;
 
-		models.Post.findAll({
-			include: [{model: models.User, as: "author"}],
+		obsidian.model("Post").findAll({
+			include: [{model: obsidian.model("User"), as: "author"}],
 			order: sortField ? [[sortField, sortDirection]] : null
 		})
 		.then(function(posts) {
@@ -38,7 +38,7 @@ module.exports = function(router) {
 	router.get("/admin/posts/:id", function(req, res, next) {
 		var id = parseInt(req.params.id);
 
-		models.Post.findById(id)
+		obsidian.model("Post").findById(id)
 		.then(function(post) {
 			res.locals.post = post;
 			res.render("admin-post");
@@ -58,7 +58,7 @@ module.exports = function(router) {
 
 		var user = _.pick(req.body, validProperties);
 
-		models.Post.update(user, {
+		obsidian.model("Post").update(user, {
 			where: {id: id},
 			fields: validProperties,
 			limit: 1
