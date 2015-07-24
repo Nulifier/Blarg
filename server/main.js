@@ -10,22 +10,37 @@ var logger		= require("./log")("application");
 var config		= require("./config");
 var path		= require("path");
 var session		= require("express-session");
-var querystring	= require("querystring");
 var moment		= require("moment");
 
 var obsidian	= require("obsidian");
 
 obsidian.init({
+	// Connection Config
 	port: config.port,
+
+	// Engine Config
+	database: config.database,
 	"view engine": "jade",
 	views: path.join(__dirname, "/templates/views"),
-	routes: require("./routes"),
-	database: config.database,
+
+	// Middleware
 	static: path.join(__dirname, "public"),
+	less: path.join(__dirname, "/../client"),
+	"less options": {
+		dest: path.join(__dirname, "/public"),
+		render: {
+			paths: [
+				path.join(__dirname, "../client/styles/inc"),
+				path.join(__dirname, "/../node_modules")
+			]
+		}
+	},
+
+	// Application
+	routes: require("./routes"),
 	models: require("./models"),
 	locals: {
-		moment: moment,
-		querystring: querystring
+		moment: moment
 	}
 });
 
