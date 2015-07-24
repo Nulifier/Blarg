@@ -43,7 +43,7 @@ module.exports = function(router) {
 	router.get("/api/posts/:id/comments", function(req, res, next) {
 		var id = parseInt(req.params.id);
 
-		models.Comment.findAll({
+		obsidian.model("Comment").findAll({
 			where: {
 				postId: id
 			}

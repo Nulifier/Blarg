@@ -1,36 +1,21 @@
 "use strict";
 
-var glob		= require("glob");
+var path		= require("path");
 var logger		= require(__base + "/log")("routes");
 var obsidian	= require("obsidian");
 
 module.exports = function(app) {
 	logger.trace("Looking for routes");
 
-	try {
-		var files = glob.sync("**/*.js", {
-			cwd: __dirname,
-			ignore: "index.js"
-		});
+	var router = obsidian.express.Router();
 
-		// Create the router
-		var router = obsidian.express.Router();
+	obsidian.requireDir(__dirname, ".", function(fullPath) {
+		// Skip this file
+		if (fullPath !== __filename) {
+			logger.trace("Adding route: " + path.basename(fullPath, ".js"));
+			require(fullPath)(router);
+		}
+	});
 
-		files.forEach(function(file) {
-			// Get the name excluding the extension
-			var routeFilename = file.substr(0, file.indexOf("."));
-
-			// Add the route
-			logger.trace("Adding route: " + routeFilename);
-			var routeProvider = require("./" + routeFilename);
-
-			// Allow the provider to add routes to our router
-			routeProvider(router);
-		});
-
-		app.use(router);
-	}
-	catch (err) {
-		logger.error("Error finding routes: " + err.stack);
-	}
+	app.use(router);
 };
