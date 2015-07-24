@@ -1,34 +1,29 @@
 "use strict";
 
 var path		= require("path");
-var glob		= require("glob");
 var logger		= require(__base + "/log")("models");
+var obsidian	= require("obsidian");
 
 module.exports = function(sequelize) {
 	// Create the db object
 	var db = {};
 
 	// Include all models in this folder
-	try {
-		var files = glob.sync("*.js", {
-			cwd: __dirname,
-			ignore: "index.js"
-		});
+	obsidian.requireDir(__dirname, ".", function(fullPath) {
+		// Skip this file
+		if (fullPath === __filename) {
+			return;
+		}
 
-		files.forEach(function(file) {
-			var model = sequelize.import(path.join(__dirname, file));
+		var model = sequelize.import(fullPath);
 
-			if (!model) {
-				throw new Error("Model definition file \"" + file + "\" failed to export anything");
-			}
+		if (!model) {
+			throw new Error("Model definition file \"" + path.basename(fullPath, ".js") + "\" failed to export anything");
+		}
 
-			logger.trace("Adding model: " + model.name);
-			db[model.name] = model;
-		});
-	}
-	catch (err) {
-		logger.error("Error loading models: " + err.message);
-	}
+		logger.trace("Adding model: " + model.name);
+		db[model.name] = model;
+	});
 
 	// Run the associate callbacks for each model to build associations after the models are created
 	Object.keys(db).forEach(function(modelName) {
