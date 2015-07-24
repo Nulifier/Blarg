@@ -1,7 +1,6 @@
 "use strict";
 
 var _			= require("lodash");
-var logger		= require("./log")("models");
 var Promise		= require("bluebird");
 var obsidian	= require("obsidian");
 

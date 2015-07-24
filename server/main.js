@@ -22,7 +22,11 @@ obsidian.init({
 	routes: require("./routes"),
 	database: config.database,
 	static: path.join(__dirname, "public"),
-	models: require("./models")
+	models: require("./models"),
+	locals: {
+		moment: moment,
+		querystring: querystring
+	}
 });
 
 var app = obsidian.get("app");
@@ -43,8 +47,6 @@ app.use(session({
 require("./authentication")(app);
 
 // Add some values for the templates to use
-app.locals.moment = moment;
-app.locals.querystring = querystring;
 app.use(function(req, res, next) {
 	res.locals.user = req.user;
 	next();

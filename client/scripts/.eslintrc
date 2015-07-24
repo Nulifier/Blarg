@@ -2,9 +2,6 @@
 	"ecmaFeatures": {
 		"jsx": true
 	},
-	"plugins": [
-		"react"
-	],
 	"env": {
 		"browser": true,
 		"es6": true
@@ -17,8 +14,5 @@
 		"strict": [2, "never"],
 		"global-strict": 0,
 		"no-extra-parens": 0,
-
-		// React rules
-		"react/display-name": 1
 	}
 }
