@@ -3,15 +3,16 @@
 var passport		= require("passport");
 var LocalStrategy	= require("passport-local");
 var models			= require(__base + "/models");
-var logger			= require(__base + "/log")("auth");
 var Promise			= require("bluebird");
+var obsidian		= require("obsidian");
 
 module.exports = function(app) {
 	// Setup strategies
-	logger.trace("Setting up strategies");
+	obsidian.log.info("Setting up authentication strategies");
+
 	passport.use(new LocalStrategy(
 		function(username, password, done) {
-			logger.info("Attempting login for user: " + username);
+			obsidian.log.info("Attempting login for user %s", username);
 			var userPromise = models.User.findOne({
 				username: username
 			});

@@ -21,5 +21,5 @@ var dbConfig = {
 module.exports = {
 	port: process.env.PORT || 3000,
 	cookieSecret: "GpARVxCNzce5Qd9GNSCO",
-	database: dbConfig[process.env.NODE_ENV]
+	database: dbConfig[process.env.NODE_ENV || "development"]
 };

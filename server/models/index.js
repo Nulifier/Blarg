@@ -1,7 +1,6 @@
 "use strict";
 
 var path		= require("path");
-var logger		= require(__base + "/log")("models");
 var obsidian	= require("obsidian");
 
 module.exports = function(sequelize) {
@@ -21,7 +20,7 @@ module.exports = function(sequelize) {
 			throw new Error("Model definition file \"" + path.basename(fullPath, ".js") + "\" failed to export anything");
 		}
 
-		logger.trace("Adding model: " + model.name);
+		obsidian.log.debug("Adding model: %s", model.name);
 		db[model.name] = model;
 	});
 

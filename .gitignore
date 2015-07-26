@@ -5,3 +5,4 @@
 /server/db.*.sqlite
 /webpack-stats-*.json
 /client/styles/fontello
+/log.json

@@ -2,7 +2,6 @@
 
 var obsidian	= require("obsidian");
 var _			= require("lodash");
-var logger		= require(__base + "/log")("routes");
 
 module.exports = function(router) {
 	router.get("/admin", function(req, res) {
@@ -64,7 +63,6 @@ module.exports = function(router) {
 			limit: 1
 		})
 		.then(function(result) {
-			logger.info("Number of updated posts: " + result[0]);
 			res.redirect(303, "/admin/posts/" + id);
 		})
 		.catch(function(err) {

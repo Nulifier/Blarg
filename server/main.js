@@ -6,7 +6,6 @@ global.__base = __dirname; // eslint-disable-line no-underscore-dangle
 var log4js		= require("log4js");
 log4js.setGlobalLogLevel("ALL");
 
-var logger		= require("./log")("application");
 var config		= require("./config");
 var path		= require("path");
 var session		= require("express-session");
@@ -46,9 +45,6 @@ obsidian.init({
 
 var app = obsidian.get("app");
 
-// Middleware
-app.use(log4js.connectLogger(require("./log")("requests"), {level: "auto"}));
-
 // Setup sessions
 // TODO: Switch to a better session store
 app.use(session({
@@ -68,7 +64,7 @@ app.use(function(req, res, next) {
 });
 
 // Sync the database models
-logger.info("Syncing database");
+obsidian.log.info("Syncing database");
 obsidian.sequelize.sync({force: true}).then(function() {
 	// Load test data if this is a development system
 	if (obsidian.get("env") === "development") {
